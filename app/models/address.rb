@@ -30,7 +30,8 @@ class Address
   end
   
   def geomarker
-    GMarker.new(ll, :icon => Variable.new("home_icon"), :title=> full_address)  
+    info="<h4>#{full_address}</h4>"
+    GMarker.new(ll, :icon => Variable.new("home_icon"), :title=> full_address, :info_window => info)  
   end  
   	
 	def persisted?

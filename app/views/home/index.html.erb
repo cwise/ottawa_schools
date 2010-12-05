@@ -1,5 +1,5 @@
 <%= simple_form_for(@address, :url => 'home/search', :remote => true) do |f| %>
-  <%= f.text_field :full_address %>
+  <%= f.text_field :full_address, :class => 'capitalized_field' %>
   <%= f.submit 'Find My Address', :class => 'button' %>
 <% end %>
 
