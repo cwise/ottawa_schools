@@ -15,6 +15,8 @@ module GoogleMapsHelper
   def geocoding_init
     @map=GMap.new("map")
     @map.control_init(:large_map => true, :map_type => true)
+    @marker_group=GMarkerGroup.new(true, {})
+    @map.overlay_global_init(@marker_group, "marker_group")
     
     icons_init
   end

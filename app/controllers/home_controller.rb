@@ -12,8 +12,10 @@ class HomeController < ApplicationController
       
       which_marker=1
       @schools.each do |school|
-        map_it school.geomarker
-      end        
+        @map.record_init @marker_group.add_marker school.geomarker, which_marker
+        which_marker+=1
+      end
+      @map.record_init @marker_group.center_and_zoom_on_markers              
     else
       map_zoom Array.[](45.4108, -75.6986), 10 
     end
