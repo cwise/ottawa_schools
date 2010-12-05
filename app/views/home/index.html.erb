@@ -1,0 +1,15 @@
+<%= simple_form_for @address, :url => 'home/search', :html => {:method => :post} do |f| %>
+  <%= f.text_field :full_address %>
+  <%= f.submit 'Find My Address', :class => 'button' %>
+<% end %>
+
+<% if @address.ll %>  
+  Latitude: <%= @address.latitude %>
+  Longitude: <%= @address.longitude %>
+<% end %>  
+
+<% if @schools %>
+  <ul>
+    <%= content_tag :li, @school.name %>
+  </ul>
+<% end %>

@@ -1,0 +1,26 @@
+development:
+  adapter: mysql2
+  host: smyth100.local
+  database: ottawa_schools_dev
+  username: root
+  password: upandatom
+  pool: 5
+  timeout: 5000
+
+test:
+    adapter: mysql2
+    host: smyth100.local
+    database: ottawa_schools_test
+    username: root
+    password: upandatom
+    pool: 5
+    timeout: 5000
+
+production:
+    adapter: mysql2
+    host: smyth100.local
+    database: ottawa_schools_prod
+    username: root
+    password: upandatom
+    pool: 5
+    timeout: 5000

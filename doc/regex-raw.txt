@@ -1,0 +1,6 @@
+RegEx expressions for raw data (OCDSB)
+
+Line 1: (.+School)(.+)(\d{3}-\d{4})$
+Line 2: (.+(St|Rd|Blvd|Dr|Ave|way))(.+)(\d{3}-\d{4})$
+Line 3: (.+)([A-Z]\d[A-Z] \d[A-Z]\d)(.+)((JK|SK|\d+)-(\d+))
+Line 4: (.+)((\d+:\d+)-(\d+:\d+))
