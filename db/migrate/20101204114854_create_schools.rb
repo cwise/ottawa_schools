@@ -22,8 +22,6 @@ class CreateSchools < ActiveRecord::Migration
             
       t.timestamps
     end
-    
-    execute "ALTER TABLE schools ADD location POINT"                                        
   end
 
   def self.down

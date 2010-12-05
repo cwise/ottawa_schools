@@ -6,9 +6,16 @@ class School < ActiveRecord::Base
   validates :street_address, :presence => true
   validates :city, :presence => true
   validates :postal_code, :presence => true  
-  scope :nearest, lambda {|lat, lng| select(["*, distance(?, ?, latitude, longitude) as distance", lat, lng]).where('distance < 10').order('distance').limit(10)}
   before_save :geocode  
     
+  def self.nearest(lat, lng)
+    find_by_sql(["SELECT schools.*, distance(?, ?, latitude, longitude) as distance FROM schools HAVING distance < 5 ORDER BY distance LIMIT 10", lat, lng])
+  end
+  
+  def distance
+    attributes['distance']
+  end  
+  
   def start_grade_code=(code)
     start_grade=Grade.where(:code => code).first
   end

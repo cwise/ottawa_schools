@@ -9,7 +9,12 @@
 <% end %>  
 
 <% if @schools %>
-  <ul>
-    <%= content_tag :li, @school.name %>
-  </ul>
+  <table>
+	<% for school in @schools do %>
+		<tr>
+    		<%= content_tag :td, school.name %>
+    		<%= content_tag :td, "%.1f" % school.distance %>
+		</tr>
+	<% end %>
+  </table>
 <% end %>

@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
     @address=session[:address] || Address.new
+    @schools=School.nearest(@address.latitude, @address.longitude) if @address
   end
   
   def search
@@ -8,8 +9,6 @@ class HomeController < ApplicationController
     @address.full_address=[@address.full_address, 'Ottawa', 'ON'].join(' ') unless @address.full_address[/Ottawa ON/]
     @address.geocode
     session[:address]=@address
-    
-    @schools=School.nearest(@address.latitude, @address.longitude)
     
     redirect_to root_path
   end

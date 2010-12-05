@@ -1,0 +1,97 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	background-color: #ffffff;
+	font-family: 'Trebuchet MS', 'Lucida Grande',
+	Verdana, Lucida, Geneva, Helvetica,
+	Arial, sans-serif;
+}
+
+textarea:focus, input:focus {
+	border: 2px solid #900;
+}
+
+a {
+	text-decoration: none;	
+}
+
+a:visited {
+	color: blue;	
+}
+
+.rounded {
+	border: 1px solid #ccc;
+	border-radius: 5px; /* IE9, Opera 10.5 */
+    -webkit-border-radius: 5px; /* Safari, Chrome */
+    -moz-border-radius: 5px; /* Firefox */
+}
+
+#content_pane {
+	clear: both;
+}
+
+#errors {
+	display: none;
+	font-size: 80%;
+}
+
+.field_with_errors input {
+	background-color: yellow;	
+}
+
+.notices {
+	width: 400px;
+	margin: 0 auto !important;
+	font-size: 60% !important;
+}
+
+.ui-notice-inner { 
+	margin-top: 20px; 
+	margin-bottom: 20px; 
+	padding: 10px; 
+}
+.ui-notice-icon { 
+	float: left; 
+	margin-right: .3em; 
+}
+
+.button {
+   font-size: .8em !important;
+}
+
+table {
+	width: 100%;
+	border: 2px solid white;
+	text-align: left;
+}
+
+th {
+	font-size: 14px;
+	padding: 10px;
+	background-color: #C0C0C0;	
+}
+
+td {
+	font-size: 12px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;	
+}
+
+tr.odd {
+	background-color: #E0E0E0;
+}
+
+tr.even {
+	background-color: #F0F0F0;
+}
+
+th.right {
+	text-align: right;
+}
+
+td.right {
+	text-align: right;
+}
