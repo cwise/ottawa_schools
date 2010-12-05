@@ -12,42 +12,13 @@
 
 ActiveRecord::Schema.define(:version => 20101204115338) do
 
-  create_table "boards", :force => true do |t|
-    t.string   "code",       :null => false
-    t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "boards" because of following NoMethodError
+#   undefined method `fetch_row' for #<Mysql2::Result:0x1038bd568>
 
-  create_table "grades", :force => true do |t|
-    t.integer  "index",       :null => false
-    t.string   "abbrev",      :null => false
-    t.string   "description", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "grades" because of following NoMethodError
+#   undefined method `fetch_row' for #<Mysql2::Result:0x1038b9ee0>
 
-  create_table "schools", :force => true do |t|
-    t.integer  "board_id",                          :null => false
-    t.string   "name",                              :null => false
-    t.string   "street_address",                    :null => false
-    t.string   "city",                              :null => false
-    t.string   "postal_code",                       :null => false
-    t.string   "phone"
-    t.string   "fax"
-    t.integer  "start_grade_id"
-    t.integer  "end_grade_id"
-    t.time     "start_time"
-    t.boolean  "semestered",     :default => false
-    t.boolean  "adaptive",       :default => false
-    t.time     "end_time"
-    t.string   "principal"
-    t.string   "vice_principal"
-    t.string   "url"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "schools" because of following NoMethodError
+#   undefined method `fetch_row' for #<Mysql2::Result:0x1038afd00>
 
 end

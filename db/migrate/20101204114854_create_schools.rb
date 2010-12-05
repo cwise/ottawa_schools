@@ -1,6 +1,6 @@
 class CreateSchools < ActiveRecord::Migration
   def self.up
-    create_table :schools do |t|
+    create_table :schools, :options=>"ENGINE=MyISAM", :force => true do |t|
       t.column :board_id, :integer, {:null => false}
       t.column :name, :string, {:length => 256, :null => false, :unique => true}
       t.column :street_address, :string, {:length => 256, :null => false}
@@ -17,11 +17,12 @@ class CreateSchools < ActiveRecord::Migration
       t.column :principal, :string, {:length => 256}
       t.column :vice_principal, :string, {:length => 256}      
       t.column :url, :string
-      t.column :latitude, :float
-      t.column :longitude, :float
+      t.column :location, :point, :null => false
             
       t.timestamps
     end
+    
+    add_index :schools, :location, :spatial => true
   end
 
   def self.down

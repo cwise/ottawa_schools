@@ -1,7 +1,7 @@
 class School < ActiveRecord::Base
   belongs_to :board
-  belongs_to :start_grade
-  belongs_to :end_grade
+  belongs_to :start_grade, :class_name => 'Grade'
+  belongs_to :end_grade, :class_name => 'Grade'
   validates :name, :presence => true
   validates :street_address, :presence => true
   validates :city, :presence => true
@@ -9,36 +9,35 @@ class School < ActiveRecord::Base
   before_save :geocode  
     
   def self.nearest(lat, lng)
-    find_by_sql(["SELECT schools.*, distance(?, ?, latitude, longitude) as distance FROM schools HAVING distance < 5 ORDER BY distance LIMIT 10", lat, lng])
+    find_by_sql(["SELECT schools.*, distance(?, ?, y(location), x(location)) as distance FROM schools HAVING distance < 5 ORDER BY distance LIMIT 10", lat, lng])
   end
   
   def distance
     attributes['distance']
   end  
   
-  def start_grade_code=(code)
-    start_grade=Grade.where(:code => code).first
+  def start_grade_code=(abbrev)
+    self.start_grade_id=Grade.where(:abbrev => abbrev).first.id
   end
   
-  def end_grade_code=()
-    end_grade=Grade.where(:code => code).first
+  def end_grade_code=(abbrev)
+    self.end_grade_id=Grade.where(:abbrev => abbrev).first.id
   end  
   
   def is_geocoded?
-    return !(latitude.nil? || longitude.nil?)
+    return !(location.nil?)
   end
 
   def geocode
     unless ((self.changed & [:street_address.to_s, :city.to_s, :postal_code.to_s]).empty?)
       if (coordinates && coordinates.success?)
-        self.latitude=coordinates.lat
-        self.longitude=coordinates.lng
+        self.location=Point.from_x_y(coordinates.lng, coordinates.lat)
       end
     end
   end
   
   def ll
-    Array.[]( latitude, longitude )
+    Array.[]( location.y, location.x )
   end
   
   def coordinates
@@ -55,7 +54,11 @@ class School < ActiveRecord::Base
     city_region=[city, 'ON'].join(" ")
     [street_address, city_region, postal_code].join(delim)
   end  
-    
+  
+  def geomarker
+    GMarker.new(ll, :icon => Variable.new("school_icon"), :title=> name)  
+  end
+   
   def self.raw_line_to_attributes(line, line_number)
     attrs={}
     case line_number
@@ -66,7 +69,7 @@ class School < ActiveRecord::Base
       pattern=/(.+(St|Rd|Blvd|Dr|Cr|Ave|way))(.+)(\d{3}-\d{4})$/
       fields=[:street_address, nil, :vice_principal, :fax]
     when 2
-      pattern=/(.+)([A-Z]\d[A-Z] \d[A-Z]\d)(.+)((JK|K|\d+)-(\d+))/
+      pattern=/(.+)([A-Z]\d[A-Z] \d[A-Z]\d)(.+)((JK|SK|\d+)-(\d+))/
       fields=[:city, :postal_code, nil, nil, :start_grade_code, :end_grade_code]
     when 3
       pattern=/(.+)((\d+:\d+)-(\d+:\d+))/
@@ -104,6 +107,7 @@ class School < ActiveRecord::Base
          unless line.blank?
            lines.push(line)
          else
+           print '.'
            school=School.new(attrs=School.attributes_from_lines(lines))
            school.board=Board.where(:code => 'O').first
            school.save if school.valid?

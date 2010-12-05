@@ -5,7 +5,7 @@ end
 
 unless Grade.exists?
   Grade.create(:index => -1, :abbrev => 'JK', :description => 'Kindergarten - Junior')
-  Grade.create(:index => 0, :abbrev => 'K', :description => 'Kindergarten - Senior')
+  Grade.create(:index => 0, :abbrev => 'SK', :description => 'Kindergarten - Senior')
   Grade.create(:index => 1, :abbrev => '1', :description => 'Grade 1')
   Grade.create(:index => 2, :abbrev => '2', :description => 'Grade 2')
   Grade.create(:index => 3, :abbrev => '3', :description => 'Grade 3')

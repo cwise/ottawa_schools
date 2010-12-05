@@ -1,18 +1,23 @@
-<%= simple_form_for @address, :url => 'home/search', :html => {:method => :post} do |f| %>
+<%= simple_form_for(@address, :url => 'home/search', :remote => true) do |f| %>
   <%= f.text_field :full_address %>
   <%= f.submit 'Find My Address', :class => 'button' %>
 <% end %>
 
-<% if @address.ll %>  
-  Latitude: <%= @address.latitude %>
-  Longitude: <%= @address.longitude %>
-<% end %>  
+<div id="map"> 	  
+	<%= raw(GMap.header(:with_vml => false, :host => request.host)) %>
+	<%= javascript_include_tag("markerGroup") %>	
+	<%= raw(@map.to_html) %>
+	<%= raw(@map.div) %>
+</div>    
 
 <% if @schools %>
   <table>
 	<% for school in @schools do %>
 		<tr>
     		<%= content_tag :td, school.name %>
+    		<%= content_tag :td, school.street_address %>
+    		<%= content_tag :td, school.start_grade.description %>
+    		<%= content_tag :td, school.end_grade.description %>
     		<%= content_tag :td, "%.1f" % school.distance %>
 		</tr>
 	<% end %>

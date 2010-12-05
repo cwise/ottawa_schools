@@ -3,8 +3,7 @@ class Address
 	include ActiveModel::Conversion
 
 	attr_accessor :full_address
-	attr_accessor :latitude
-	attr_accessor :longitude
+	attr_accessor :location
 	
 	def initialize(attributes={})
     unless attributes.empty?
@@ -15,14 +14,13 @@ class Address
 	def geocode
     unless (full_address.blank?)
       if (coordinates && coordinates.success?)
-        self.latitude=coordinates.lat
-        self.longitude=coordinates.lng
+        self.location=Point.from_x_y(coordinates.lng, coordinates.lat)
       end
     end
   end
 	
   def ll
-    Array.[]( latitude, longitude )
+    Array.[](location.y, location.x)
   end
   
   def coordinates
@@ -30,6 +28,10 @@ class Address
       Geokit::Geocoders::GoogleGeocoder.geocode(full_address)
     end
   end
+  
+  def geomarker
+    GMarker.new(ll, :icon => Variable.new("home_icon"), :title=> full_address)  
+  end  
   	
 	def persisted?
 	  false

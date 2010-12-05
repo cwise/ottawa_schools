@@ -36,6 +36,14 @@ a:visited {
 	font-size: 80%;
 }
 
+#map {
+   background-color: #afeeee;
+   float: left;
+   width: 800px;
+   height: 500px;
+   font-size: smaller;
+}
+
 .field_with_errors input {
 	background-color: yellow;	
 }
