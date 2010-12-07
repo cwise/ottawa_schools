@@ -10,15 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101204115338) do
+ActiveRecord::Schema.define(:version => 20101207000047) do
 
 # Could not dump table "boards" because of following NoMethodError
-#   undefined method `fetch_row' for #<Mysql2::Result:0x1038bd568>
+#   undefined method `fetch_row' for #<Mysql2::Result:0x10322c168>
+
+# Could not dump table "boundaries" because of following NoMethodError
+#   undefined method `fetch_row' for #<Mysql2::Result:0x103228130>
 
 # Could not dump table "grades" because of following NoMethodError
-#   undefined method `fetch_row' for #<Mysql2::Result:0x1038b9ee0>
+#   undefined method `fetch_row' for #<Mysql2::Result:0x103224b98>
+
+# Could not dump table "programmes" because of following NoMethodError
+#   undefined method `fetch_row' for #<Mysql2::Result:0x103221920>
 
 # Could not dump table "schools" because of following NoMethodError
-#   undefined method `fetch_row' for #<Mysql2::Result:0x1038afd00>
+#   undefined method `fetch_row' for #<Mysql2::Result:0x10321af30>
 
 end

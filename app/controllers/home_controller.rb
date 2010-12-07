@@ -7,7 +7,10 @@ class HomeController < ApplicationController
     if @address.location
       map_zoom Array.[](@address.location.y, @address.location.x), 10
       
-      @schools=School.nearest(@address.location.y, @address.location.x)       
+      @schools=School.nearest(@address.location)
+      @boundaries=Boundary.zoned(@address.location).all  
+      @boundaries=@boundaries.select { |boundary| boundary.contains_point?(@address.location) }  # post process boundaries for accuracy (MySQL only does MBR)
+          
       map_it @address.geomarker
       
       which_marker=1

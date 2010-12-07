@@ -3,6 +3,7 @@ class CreateSchools < ActiveRecord::Migration
     create_table :schools, :options=>"ENGINE=MyISAM", :force => true do |t|
       t.column :board_id, :integer, {:null => false}
       t.column :name, :string, {:length => 256, :null => false, :unique => true}
+      t.column :name_key, :string, {:length => 8, :null => false, :unique => true}
       t.column :street_address, :string, {:length => 256, :null => false}
       t.column :city, :string, {:length => 256, :null => false}      
       t.column :postal_code, :string, {:length => 7, :null => false}

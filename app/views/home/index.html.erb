@@ -13,7 +13,7 @@
 <% if @schools %>
   <table>
 	<% for school in @schools do %>
-		<tr>
+		<tr <%= @boundaries.detect {|boundary| boundary.school_id==school.id} ? "class='zoned'" : "" %> >
     		<%= content_tag :td, school.name %>
     		<%= content_tag :td, school.street_address %>
     		<%= content_tag :td, school.start_grade.description %>

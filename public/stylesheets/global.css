@@ -103,3 +103,7 @@ th.right {
 td.right {
 	text-align: right;
 }
+
+tr.zoned {
+	background-color: yellow;
+}

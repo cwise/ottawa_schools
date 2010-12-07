@@ -6,10 +6,14 @@ class School < ActiveRecord::Base
   validates :street_address, :presence => true
   validates :city, :presence => true
   validates :postal_code, :presence => true  
-  before_save :geocode  
+  before_save :geocode, :generate_name_key  
     
-  def self.nearest(lat, lng)
-    find_by_sql(["SELECT schools.*, distance(?, ?, y(location), x(location)) as distance FROM schools HAVING distance < 5 ORDER BY distance LIMIT 10", lat, lng])
+  def generate_name_key
+    self.name_key=School.name_key(name)
+  end
+  
+  def self.nearest(location)
+    find_by_sql(["SELECT schools.*, distance(?, ?, y(location), x(location)) as distance FROM schools HAVING distance < 5 ORDER BY distance LIMIT 10", location.y, location.x])
   end
   
   def distance
@@ -136,5 +140,13 @@ class School < ActiveRecord::Base
     rescue EOFError
         f.close    
         puts "Added: #{good_count} Rejected: #{bad_count}"
+  end
+  
+  def self.name_key(name_to_key)
+    name_key=name_to_key.upcase
+    name_key.gsub!('.', '')
+    name_key.gsub!('-', '')
+    name_key.gsub!(' ', '')    
+    name_key[0..7]
   end
 end

@@ -19,3 +19,9 @@ unless Grade.exists?
   Grade.create(:index => 11, :abbrev => '11', :description => 'Grade 11')
   Grade.create(:index => 12, :abbrev => '12', :description => 'Grade 12')  
 end
+
+unless Programme.exists?
+  Programme.create(:code => 'E', :description => 'English')
+  Programme.create(:code => 'FE', :description => 'Early French Immersion')
+  Programme.create(:code => 'FL', :description => 'Late French Immersion')  
+end
