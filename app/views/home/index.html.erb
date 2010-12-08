@@ -1,7 +1,32 @@
-<%= simple_form_for(@address, :url => 'home/search', :remote => true) do |f| %>
-  <%= f.text_field :full_address, :size => 100, :class => 'capitalized_field' %>
-  <%= f.submit 'Find My Address', :class => 'button' %>
-<% end %>
+<div id="search">
+	<%= content_tag :h1, 'Ottawa Schools' %>
+	<%= simple_form_for(@address, :url => 'home/search', :remote => true) do |f| %>
+	  <%= f.text_field :full_address, :size => 100, :class => 'capitalized_field' %>
+	  <%= f.submit 'Find My Address', :class => 'button' %>
+	<% end %>
+</div>
+
+<div id="results">
+	<% if @schools %>
+	  <table>
+		<tr>
+			<%= content_tag :th, 'School' %>
+			<%= content_tag :th, 'KMs', :class => 'right' %>
+		</tr>
+		<% for school in @schools do %>
+			<tr class='<%= @boundaries.detect {|boundary| boundary.school_id==school.id} ? 'zoned' : cycle('odd', 'even') %>' >
+	    		<td>
+					<%= content_tag(:strong, school.name) %><br/>
+	    			<%= school.street_address %><br/>
+	    			<%= school.start_grade.description %> to 
+	    			<%= school.end_grade.description %>
+				</td>
+				<%= content_tag :td, "%.1f" % school.distance, :class => 'right' %>	
+			</tr>
+		<% end %>
+	  </table>
+	<% end %>
+</div>
 
 <div id="map"> 	  
 	<%= raw(GMap.header(:with_vml => false, :host => request.host)) %>
@@ -10,16 +35,3 @@
 	<%= raw(@map.div) %>
 </div>    
 
-<% if @schools %>
-  <table>
-	<% for school in @schools do %>
-		<tr <%= @boundaries.detect {|boundary| boundary.school_id==school.id} ? "class='zoned'" : "" %> >
-    		<%= content_tag :td, school.name %>
-    		<%= content_tag :td, school.street_address %>
-    		<%= content_tag :td, school.start_grade.description %>
-    		<%= content_tag :td, school.end_grade.description %>
-    		<%= content_tag :td, "%.1f" % school.distance %>
-		</tr>
-	<% end %>
-  </table>
-<% end %>

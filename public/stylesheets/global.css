@@ -13,18 +13,18 @@ textarea:focus, input:focus {
 }
 
 a {
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 a:visited {
-	color: blue;	
+	color: blue;
 }
 
 .rounded {
 	border: 1px solid #ccc;
 	border-radius: 5px; /* IE9, Opera 10.5 */
-    -webkit-border-radius: 5px; /* Safari, Chrome */
-    -moz-border-radius: 5px; /* Firefox */
+	-webkit-border-radius: 5px; /* Safari, Chrome */
+	-moz-border-radius: 5px; /* Firefox */
 }
 
 #content_pane {
@@ -37,15 +37,24 @@ a:visited {
 }
 
 #map {
-   background-color: #afeeee;
-   float: left;
-   width: 800px;
-   height: 500px;
-   font-size: smaller;
+	float: left;
+	background-color: #afeeee;
+	height: 400px;
+	width: 400px;
+	font-size: smaller;
 }
 
+#search h1 {
+	display: inline;
+}
+
+#results {
+	float: left;
+	width: 400px;
+	overflow-y: auto;
+}
 .field_with_errors input {
-	background-color: yellow;	
+	background-color: yellow;
 }
 
 .notices {
@@ -54,18 +63,18 @@ a:visited {
 	font-size: 60% !important;
 }
 
-.ui-notice-inner { 
-	margin-top: 20px; 
-	margin-bottom: 20px; 
-	padding: 10px; 
+.ui-notice-inner {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 10px;
 }
-.ui-notice-icon { 
-	float: left; 
-	margin-right: .3em; 
+.ui-notice-icon {
+	float: left;
+	margin-right: .3em;
 }
 
 .button {
-   font-size: .8em !important;
+	font-size: .8em !important;
 }
 
 table {
@@ -77,7 +86,7 @@ table {
 th {
 	font-size: 14px;
 	padding: 10px;
-	background-color: #C0C0C0;	
+	background-color: #C0C0C0;
 }
 
 td {
@@ -85,7 +94,7 @@ td {
 	padding-left: 10px;
 	padding-right: 10px;
 	padding-top: 5px;
-	padding-bottom: 5px;	
+	padding-bottom: 5px;
 }
 
 tr.odd {
