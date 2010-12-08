@@ -25,7 +25,9 @@ class Address
   
   def coordinates
     unless full_address.blank?
-      Geokit::Geocoders::GoogleGeocoder.geocode(full_address)
+      g=Geokit::Geocoders::GoogleGeocoder.geocode(full_address)
+      self.full_address=g.full_address
+      g
     end
   end
   

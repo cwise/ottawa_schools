@@ -27,6 +27,13 @@ class Boundary < ActiveRecord::Base
     self.programme_code=parts[3]
   end
   
+  def polygon
+    p=GPolygon.from_georuby(bounds)
+    p.opacity=0.3
+    p.color="#ffff00"
+    p
+  end
+  
   def self.read_from_file(path)
     xml=File.read(path)
     doc=Hpricot::XML(xml)
@@ -37,6 +44,16 @@ class Boundary < ActiveRecord::Base
     b.interpret_name
     b.bounds=GeoRuby::SimpleFeatures::Geometry.from_kml(polygon.to_s)
     b
+  end
+
+  def self.load_overlays
+    Boundary.delete_all
+    files=Dir.glob("data/overlays/*.kml")
+    files.each do |file_name|
+      puts file_name
+      b=Boundary.read_from_file(file_name)
+      b.save
+    end
   end
 
   def contains_point?(point)

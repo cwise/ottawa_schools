@@ -8,11 +8,16 @@ class HomeController < ApplicationController
       map_zoom Array.[](@address.location.y, @address.location.x), 10
       
       @schools=School.nearest(@address.location)
-      @boundaries=Boundary.zoned(@address.location).all  
+      @boundaries=Boundary.includes([:start_grade, :end_grade]).zoned(@address.location).all  
       @boundaries=@boundaries.select { |boundary| boundary.contains_point?(@address.location) }  # post process boundaries for accuracy (MySQL only does MBR)
           
+      # map the target address
       map_it @address.geomarker
       
+      # show the applicable boundaries
+      @boundaries.each { |boundary| map_it boundary.polygon }
+      
+      # add markers for each of the schools
       which_marker=1
       @schools.each do |school|
         @map.record_init @marker_group.add_marker school.geomarker, which_marker
