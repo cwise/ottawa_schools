@@ -1,28 +1,24 @@
-<div id="search">
+<div id="header">
 	<%= content_tag :h1, 'Ottawa Schools' %>
-	<%= simple_form_for(@address, :url => 'home/search', :remote => true) do |f| %>
-	  <%= f.text_field :full_address, :size => 100, :class => 'capitalized_field' %>
-	  <%= f.submit 'Find My Address', :class => 'button' %>
-	<% end %>
+	<%= content_tag :p, 'Enter your home address and find out which schools you are zoned for and your proximity to other schools' %>
+	<div id="search">
+  	<%= simple_form_for(@address, :url => 'home/search', :remote => true) do |f| %>
+  	  <%= f.text_field :full_address, :size => 100, :class => 'capitalized_field' %>
+  	  <%= f.submit 'Find My Address', :class => 'button' %>
+  	<% end %>
+	</div>
 </div>
 
 <div id="results">
 	<% if @schools %>
 	  <table>
 		<tr>
+      <th/>
 			<%= content_tag :th, 'School' %>
 			<%= content_tag :th, 'KMs', :class => 'right' %>
 		</tr>
 		<% for school in @schools do %>
-			<tr class='<%= @boundaries.detect {|boundary| boundary.school_id==school.id} ? 'zoned' : cycle('odd', 'even') %>' >
-	    		<td>
-					<%= content_tag(:strong, school.name) %><br/>
-	    			<%= school.street_address %><br/>
-	    			<%= school.start_grade.description %> to 
-	    			<%= school.end_grade.description %>
-				</td>
-				<%= content_tag :td, "%.1f" % school.distance, :class => 'right' %>	
-			</tr>
+			<%= render :partial => 'school', :locals => {:school => school} %>
 		<% end %>
 	  </table>
 	<% end %>

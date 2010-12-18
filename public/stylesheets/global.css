@@ -44,10 +44,6 @@ a:visited {
 	font-size: smaller;
 }
 
-#search h1 {
-	display: inline;
-}
-
 #results {
 	float: left;
 	width: 400px;
@@ -111,6 +107,11 @@ th.right {
 
 td.right {
 	text-align: right;
+}
+
+
+td.center {
+	text-align: center;
 }
 
 tr.zoned {

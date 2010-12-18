@@ -59,7 +59,7 @@ class School < ActiveRecord::Base
     [street_address, city_region, postal_code].join(delim)
   end  
   
-  def geomarker
+  def geomarker(marker_name)
     info="<h4>#{name}</h4>"
     info << "<p>"
     info << "#{street_address}<br/>"
@@ -69,7 +69,7 @@ class School < ActiveRecord::Base
     info << "Phone: #{phone}<br/>"
     info << "Fax: #{fax}"
     info << "</p>"
-    GMarker.new(ll, :icon => Variable.new("school_icon"), :title=> name, :info_window => info)  
+    GMarker.new(ll, :icon => Variable.new(marker_name), :title=> name, :info_window => info)  
   end
    
   def self.raw_line_to_attributes(line, line_number)

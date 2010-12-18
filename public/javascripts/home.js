@@ -1,7 +1,7 @@
 function calculate_content_height() {
 	win_height=jQuery(window).height();    	 
-	header_height=jQuery("#search").outerHeight();
-	content_height=(win_height-header_height-10);
+	header_height=jQuery("#header").outerHeight();
+	content_height=(win_height-header_height-25);
 	
 	return content_height;  	  
 };

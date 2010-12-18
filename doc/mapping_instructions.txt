@@ -1,0 +1,58 @@
+Mapping Instructions
+--------------------
+
+Maps of zone boundaries are located for the Ottawa Board at the following links:
+
+Elementary: http://www.ocdsb.ca/sch/os/ebm/Pages/default.aspx
+Secondary: http://www.ocdsb.ca/sch/os/sbm/Pages/default.aspx
+
+The task is to create polygons for each boundary map belonging to a school. Google Earth is required to create the polygons and a mouse with a scroll-wheel is highly recommended.
+
+File Naming
+-----------
+
+The file naming convention for overlays is SCHOOLKY_SG_EG_PG, where each segment is a follows:
+
+SCHOOLKY: Taking the first 8 letters of the school name uniquely identifies it (e.g. Alta Vista Public => ALTAVIST, A.Y. Jackson Secondary => AYJACKSO)
+
+SG: Starting grade (e.g. JK, SK, 1, 2, 3...12)
+
+EG: Ending grade
+
+Programme: The programme this boundary is applicable to (E => English, FE => Early French, FM => Middle French, FL => Late French)
+
+All files should be saved as KML, as opposed to KMZ, the compressed version of the same.
+
+Google Earth
+------------
+
+Google Earth allows you to have many different placemarks and overlays visible at any time. I would suggest turning off all Layers except for "Borders and Labels" and "Roads". This will make the display less cluttered.
+
+Steps for creating a polygon (overlay):
+
+- locate the general area that you will be mapping
+- click the Add Polygon tool
+- a new entry will be added to your "Places" list
+- enter the name of the file in the format described above
+- move the floating window aside, but don't close it
+- the polygon tool works by letting you click consecutive points
+- the last point you click will always try to close the linear ring by connecting with the first point (don't let this distract you from what might appear to be funny areas early on)
+- pick a corner of the map to start on, using the arrow keys to pan the map (you can't click the control) and then the scrollwheel to zoom in
+- click on the map on the first vertex (it's important to zoom in close enough to see both sides of the street)
+	- if the vertex starts a segment that encompasses only one side of the street, it's important that run the line segment right down the middle
+	- if you misplace the vertex, simply click and drag it to move it
+	- the last vertex you click will have an effect on where the next vertex is placed (i.e. inserted after that selected vertex)
+- determine where you will lay the next vertex for a continuous line segment 
+	- if there is a curve in the road or area, you put the next vertex at the start of the curve and then lay additional points to approximate the curve (don't use too many vertices)
+	- use as few vertices as possible - if there is a very long road (like Baseline for example) that is truly straight and it's the border you are to draw, then attempt it in a single segment
+	- using fewer vertices means the polygons are as simple as possible and keeps the backend calculations manageable
+- continue creating vertices until you have completed the entire polygon
+- click Ok in the floating window to save changes
+
+Suggestions:
+
+- when you've completed one overlay and go to start work on the next, pick one that is contiguous and keep the previous overlay displayed - you can then use the common borders as a quick reference
+
+Exporting
+---------
+When you have completed the files, export each using a right-mouse button click on the place list to "Save Place as...". Then you can send me the files for QA.

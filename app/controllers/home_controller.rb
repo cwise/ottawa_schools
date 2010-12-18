@@ -20,7 +20,9 @@ class HomeController < ApplicationController
       # add markers for each of the schools
       which_marker=1
       @schools.each do |school|
-        @map.record_init @marker_group.add_marker school.geomarker, which_marker
+        marker_name="school_icon"
+        marker_name="school_zoned_icon" if @boundaries.detect { |boundary| boundary.school_id==school.id } 
+        @map.record_init @marker_group.add_marker school.geomarker(marker_name), which_marker
         which_marker+=1
       end
       @map.record_init @marker_group.center_and_zoom_on_markers              

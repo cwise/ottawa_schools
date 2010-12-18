@@ -1,6 +1,7 @@
 module GoogleMapsHelper
   def icons_init
     create_icon("school_icon")
+    create_icon("school_zoned_icon")
     create_icon("home_icon")      
   end
 
