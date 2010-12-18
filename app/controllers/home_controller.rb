@@ -2,17 +2,22 @@ class HomeController < ApplicationController
   include GoogleMapsHelper
   
   def index
-    @address=session[:address] || Address.new
+    build_lists
+
+    @search=Search.new(params[:search] || session[:search] || {})
+    @search.update_address
+    session[:search]=@search.attributes
+
     geocoding_init
-    if @address.location
-      map_zoom Array.[](@address.location.y, @address.location.x), 10
+    if @search.address.location
+      map_zoom Array.[](@search.address.location.y, @search.address.location.x), 10
       
-      @schools=School.nearest(@address.location)
-      @boundaries=Boundary.includes([:start_grade, :end_grade]).zoned(@address.location).all  
-      @boundaries=@boundaries.select { |boundary| boundary.contains_point?(@address.location) }  # post process boundaries for accuracy (MySQL only does MBR)
+      @schools=School.nearest(@search)
+      @boundaries=Boundary.includes([:start_grade, :end_grade]).board(@search.board_id).programme(@search.programme_id).zoned(@search.address.location).all  
+      @boundaries=@boundaries.select { |boundary| boundary.contains_point?(@search.address.location) }  # post process boundaries for accuracy (MySQL only does MBR)
           
       # map the target address
-      map_it @address.geomarker
+      map_it @search.address.geomarker
       
       # show the applicable boundaries
       @boundaries.each { |boundary| map_it boundary.polygon }
@@ -32,11 +37,18 @@ class HomeController < ApplicationController
   end
   
   def search
-    @address=Address.new(params[:address])
-    @address.full_address=[@address.full_address, 'Ottawa', 'ON'].join(' ') unless @address.full_address[/Ottawa ON/]
-    @address.geocode
-    session[:address]=@address
+    @search=Search.new(params[:search] || session[:search] || {})
+    @search.full_address=[@search.full_address, 'Ottawa', 'ON'].join(' ') unless @search.full_address[/Ottawa ON/]    
+    session[:search]=@search.attributes
     
     redirect_to root_path
+  end
+  
+  private
+  def build_lists
+    @boards=[Board.new(:id => 0, :name => 'All')]
+    @boards|=Board.order('name').all
+    @programmes=[Programme.new(:id => 0, :description => 'All')]
+    @programmes|=Programme.order('description').all
   end
 end

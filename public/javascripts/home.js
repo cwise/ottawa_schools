@@ -15,14 +15,14 @@ function calculate_map_width() {
 	return map_width;  	  
 };
 
-jQuery(window).resize(function() {
-	jQuery("#results").height(calculate_content_height());
-	jQuery("#map").height(calculate_content_height());    	
-	jQuery("#map").width(calculate_map_width());  	
+$(window).resize(function() {
+	$("#results").height(calculate_content_height());
+	$("#map").height(calculate_content_height());    	
+	$("#map").width(calculate_map_width());  	
 });
 
-jQuery(document).ready(function() {
-	jQuery("#results").height(calculate_content_height());
-	jQuery("#map").height(calculate_content_height());    	
-	jQuery("#map").width(calculate_map_width());   
+$(document).ready(function() {
+	$("#results").height(calculate_content_height());
+	$("#map").height(calculate_content_height());    	
+	$("#map").width(calculate_map_width());   
 });	

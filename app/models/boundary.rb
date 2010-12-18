@@ -5,7 +5,9 @@ class Boundary < ActiveRecord::Base
   belongs_to :end_grade, :class_name => 'Grade'
   validates :name, :presence => true
   scope :zoned, lambda {|location| where(["MBRContains(bounds, ?)", location])}
-
+  scope :board, lambda {|board_id| where(["school_id IN (SELECT id FROM schools WHERE board_id = ?)", board_id]) unless board_id.to_i.zero?}
+  scope :programme, lambda {|programme_id| where(["programme_id = ?", programme_id]) unless programme_id.to_i.zero?}
+  
   def start_grade_code=(abbrev)
     self.start_grade_id=Grade.where(:abbrev => abbrev).first.id
   end
@@ -29,8 +31,8 @@ class Boundary < ActiveRecord::Base
   
   def polygon
     p=GPolygon.from_georuby(bounds)
-    p.opacity=0.3
-    p.color="#ffff00"
+    p.opacity=programme.opacity.to_f/100.0
+    p.color=school.board.colour
     p
   end
   

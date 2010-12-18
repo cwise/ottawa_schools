@@ -4,6 +4,7 @@ class Address
 
 	attr_accessor :full_address
 	attr_accessor :location
+	attr_accessor :cached_coordinates
 	
 	def initialize(attributes={})
     unless attributes.empty?
@@ -12,7 +13,7 @@ class Address
 	end
 	
 	def geocode
-    unless (full_address.blank?)
+    unless full_address.blank?
       if (coordinates && coordinates.success?)
         self.location=Point.from_x_y(coordinates.lng, coordinates.lat)
       end
@@ -24,11 +25,11 @@ class Address
   end
   
   def coordinates
-    unless full_address.blank?
-      g=Geokit::Geocoders::GoogleGeocoder.geocode(full_address)
-      self.full_address=g.full_address
-      g
+    unless cached_coordinates || full_address.blank?
+      self.cached_coordinates=Geokit::Geocoders::GoogleGeocoder.geocode(full_address)
+      self.full_address=cached_coordinates.full_address
     end
+    self.cached_coordinates
   end
   
   def geomarker

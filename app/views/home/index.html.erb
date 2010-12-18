@@ -1,10 +1,13 @@
 <div id="header">
 	<%= content_tag :h1, 'Ottawa Schools' %>
 	<%= content_tag :p, 'Enter your home address and find out which schools you are zoned for and your proximity to other schools' %>
+	<%= content_tag :small, "Currently #{School.count} schools and #{Boundary.count} boundary maps in the database" %>	
 	<div id="search">
-  	<%= simple_form_for(@address, :url => 'home/search', :remote => true) do |f| %>
-  	  <%= f.text_field :full_address, :size => 100, :class => 'capitalized_field' %>
-  	  <%= f.submit 'Find My Address', :class => 'button' %>
+  	<%= simple_form_for(@search, :url => 'home/search', :remote => true) do |f| %>
+  	  Address: <%= f.text_field :full_address, :size => 75, :class => 'capitalized_field' %><br />
+  	  Board: <%= f.collection_select :board_id, @boards, :id, :name %><br />
+  	  Programme: <%= f.collection_select :programme_id, @programmes, :id, :description %><br />
+  	  <%= f.submit 'Find', :class => 'button' %>
   	<% end %>
 	</div>
 </div>
@@ -25,9 +28,11 @@
 </div>
 
 <div id="map"> 	  
-	<%= raw(GMap.header(:with_vml => false, :host => request.host)) %>
-	<%= javascript_include_tag("markerGroup") %>	
-	<%= raw(@map.to_html) %>
-	<%= raw(@map.div) %>
+  <% if @schools %>  
+  	<%= raw(GMap.header(:with_vml => false, :host => request.host)) %>
+  	<%= javascript_include_tag("markerGroup") %>	
+  	<%= raw(@map.to_html) %>
+  	<%= raw(@map.div) %>
+	<% end %>
 </div>    
 

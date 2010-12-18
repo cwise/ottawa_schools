@@ -12,8 +12,19 @@ class School < ActiveRecord::Base
     self.name_key=School.name_key(name)
   end
   
-  def self.nearest(location)
-    find_by_sql(["SELECT schools.*, distance(?, ?, y(location), x(location)) as distance FROM schools HAVING distance < 5 ORDER BY distance LIMIT 10", location.y, location.x])
+  def self.nearest(search)
+    board_ids=[]
+    board_ids << search.board_id unless search.board_id.to_i.zero?
+    board_ids=Board.all.map(&:id) if search.board_id.to_i.zero?
+    programme_ids=[]
+    programme_ids << search.programme_id unless search.programme_id.to_i.zero?
+    programme_ids=Programme.all.map(&:id) if search.programme_id.to_i.zero?
+    sql=[]
+    sql << "SELECT schools.*, distance(?, ?, y(location), x(location)) as distance"
+    sql << "FROM schools"
+    sql << "WHERE board_id IN (?) AND EXISTS (SELECT * FROM boundaries WHERE school_id=schools.id AND programme_id IN (?))"
+    sql << "HAVING distance < 5 ORDER BY distance LIMIT 10"
+    find_by_sql([sql.join(' '), search.address.location.y, search.address.location.x, board_ids.join(', '), programme_ids.join(', ')])
   end
   
   def distance
