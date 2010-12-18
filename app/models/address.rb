@@ -14,6 +14,7 @@ class Address
 	
 	def geocode
     unless full_address.blank?
+      self.full_address+=" Ottawa ON" unless full_address[/Ottawa ON/]
       if (coordinates && coordinates.success?)
         self.location=Point.from_x_y(coordinates.lng, coordinates.lat)
       end
