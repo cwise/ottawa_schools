@@ -17,7 +17,6 @@ class Boundary < ActiveRecord::Base
   end
   
   def programme_code=(code)
-    puts "programme code = #{code}"
     self.programme_id=Programme.where(:code => code).first.id
   end
   
