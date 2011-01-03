@@ -25,3 +25,7 @@ unless Programme.exists?
   Programme.create(:code => 'FE', :description => 'Early French Immersion')
   Programme.create(:code => 'FL', :description => 'Late French Immersion')  
 end
+
+unless Programme.exists?(:code => 'FM', :description => 'Middle French Immersion')
+  Programme.create(:code => 'FM', :description => 'Middle French Immersion')
+end

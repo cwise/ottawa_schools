@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>FORESTVA_JK_6_E.kml</name>
+	<Style id="sn_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>FORESTVA_JK_6_E</name>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-75.53128405226596,45.46976400179101,0 -75.53261610224938,45.47115129675821,0 -75.53354781120639,45.47205241609384,0 -75.53363477484288,45.47248613398347,0 -75.53405058762976,45.47354995063471,0 -75.53406127345973,45.47360365732128,0 -75.55993995357473,45.46359578038401,0 -75.55743580990504,45.46332257091234,0 -75.55682279113188,45.46039002754991,0 -75.55510191244822,45.45666180038494,0 -75.5538254263936,45.45431468653457,0 -75.55263754256707,45.45205345690096,0 -75.54634729798384,45.44074133054667,0 -75.54034271757372,45.44105900456388,0 -75.53904443283759,45.44188102152435,0 -75.53273898661922,45.44441917540284,0 -75.53070078474261,45.44525865307467,0 -75.52724758904573,45.44659039796765,0 -75.52726398492349,45.44659547526345,0 -75.52198109072093,45.44876752929447,0 -75.52603427602533,45.45538734984911,0 -75.52525610045603,45.45577455656198,0 -75.52451677945339,45.45658223222095,0 -75.52443838799822,45.45757618668053,0 -75.52493151546788,45.45880579456932,0 -75.52493434971004,45.45882099031877,0 -75.5271238358693,45.46366302571973,0 -75.52973121396062,45.4680402083485,0 -75.5302485554822,45.46857501178415,0 -75.53128405226596,45.46976400179101,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
