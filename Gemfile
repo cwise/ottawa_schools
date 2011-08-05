@@ -5,7 +5,7 @@ gem 'geokit'
 gem 'GeoRuby'
 gem 'hpricot'
 gem 'simple_form'
-gem 'spatial_adapter', :git => 'git@github.com:cwise/spatial_adapter.git'
+gem 'spatial_adapter'
 
 group :development do
 	gem 'mysql2', '0.2.7'
